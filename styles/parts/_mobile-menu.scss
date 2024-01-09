@@ -1,0 +1,157 @@
+@use "../globals" as *;
+@use "../parts/common" as *;
+
+.mobile-menu {
+  position: fixed;
+  border: solid 0px transparent;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0;
+  transition: 0.3s;
+  background: $cBgColorGray;
+  overflow-x: hidden;
+  &__logo {
+    @extend .content-width850;
+    & > img {
+      width: 60%;
+      margin: 0 auto;
+    }
+  }
+
+  &__btn {
+    background: $cWhite;
+    padding: 10px 6px;
+    border: none;
+    outline: none !important;
+    cursor: pointer;
+    background: transparent;
+
+    & > span {
+      margin-left: auto;
+      background-color: $cBlack;
+      width: 35px;
+      height: 2px;
+      display: block;
+      margin-bottom: 9px;
+      transition: transform 0.7s;
+      &:nth-child(2) {
+        width: 31px;
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+        width: 27px;
+      }
+    }
+  }
+  &__ex-btn {
+    @extend .content-width850;
+    @extend .flex;
+    justify-content: space-around;
+    & .btn {
+      flex-basis: 45%;
+      padding: 4px 2px;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.5;
+      border-radius: 30px;
+      color: $cWhite;
+      text-decoration: none;
+      border: 1px solid $cWhite;
+      display: block;
+      text-align: center;
+      margin-bottom: 10px;
+      transition: 0.3s;
+      &:hover {
+        background: linear-gradient(
+          to bottom right,
+          $cYellow 0%,
+          $cYellow 30%,
+          $cBlue 70%,
+          $cBlue 100%
+        );
+        box-shadow: 0 0 15px $cYellow;
+      }
+    }
+  }
+}
+
+.menu {
+  &__main {
+    @extend .content-width850;
+    padding: 0;
+    perspective: 2000px;
+    transform-style: preserve-3d;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  &__item {
+    flex-basis: 48%;
+    list-style: none;
+    display: block;
+    transform: translate3d(0, 0, -1000px);
+
+    transition: transform 0.3s, opacity 0.2s;
+    opacity: 0;
+    border-bottom: 1px dotted $cWhite;
+    position: relative;
+
+    & a {
+      width: 100%;
+      display: block;
+      text-decoration: none !important;
+      text-align: center;
+      color: $cWhite;
+      padding: 20px 0;
+    }
+  }
+}
+
+.menu-open {
+  & .mobile-menu {
+    height: 100vh;
+    padding-top: 70px;
+    color: $cWhite;
+
+    &__btn {
+      & > span {
+        background-color: $cWhite;
+        width: 35px;
+        &:nth-child(1) {
+          transition-delay: 70ms;
+          transform: translateY(11px) rotate(135deg);
+        }
+        &:nth-child(2) {
+          transition-delay: 0s;
+          transform: translateX(-18px) scaleX(0);
+        }
+        &:nth-child(3) {
+          transition-delay: 140ms;
+          transform: translateY(-11px) rotate(-135deg);
+        }
+      }
+    }
+  }
+  //モバイルメニューとフッターのメニュー
+  .menu {
+    &__item {
+      transform: none;
+      opacity: 1;
+
+      @for $i from 1 through 8 {
+        &:nth-child(#{$i}) {
+          transition-delay: $i * 0.07s;
+        }
+      }
+    }
+  }
+  .fixed-btns {
+    display: none;
+  }
+}

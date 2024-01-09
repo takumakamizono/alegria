@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName "Input your ID and Password."
+AuthUserFile /home/users/1/main.jp-mcomserver/web/alegria/.htpasswd
+require valid-user
