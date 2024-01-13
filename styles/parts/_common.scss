@@ -165,6 +165,15 @@ img {
     display: none;
   }
 }
+.not-sp-md {
+  display: none;
+  @include mq(sm) {
+    display: block;
+  }
+  @include mq(lg) {
+    display: none;
+  }
+}
 .sp-md {
   display: none;
   @include mq(md) {
